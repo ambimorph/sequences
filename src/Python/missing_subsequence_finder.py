@@ -13,12 +13,10 @@ class MSF(object):
         returns True if the prefix now has all four possible endings
         """
         prefix = word[:-1]
-        try:
+        if self.d.has_key(prefix): # else prefix is already known to be full
             self.d[prefix].add(word[-1])
             if len(self.d[prefix]) == 4:
                 return True
-        except KeyError, e: # means that prefix is already known to be full
-            return
 
     def update_full_key(self, prefix):
         """
@@ -37,9 +35,9 @@ class MSF(object):
             full = self.insert_last_letter(word)
             if full:
                 self.update_full_key(word[:-1])
-            if len(self.d) == 4**i:
-                print "Checked {} words in {} seconds".format(w+1, time.time()-t)
-                return True
+                if len(self.d) == 4**i:
+                    print "Checked {} words in {} seconds".format(w+1, time.time()-t)
+                    return True
 
     def search(self, n):
         """
