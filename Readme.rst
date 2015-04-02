@@ -2,7 +2,7 @@
  Missing Sequence Finder
 =========================
 
-Finds subsequences of up to length n not present in a sequence (s) made from an alphabet
+Finds subsequences of up to length n not present in a sequence (s) made from an alphabet.
 
 Gist
 ====
