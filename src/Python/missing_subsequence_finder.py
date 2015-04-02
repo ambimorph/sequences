@@ -68,7 +68,6 @@ if __name__ == '__main__':
                     if c not in msf.d[k]:
                         missing_subsequences.append(k+c)
                         
-        print s
         print missing_subsequences
 
         for k,v in msf.d.iteritems(): 
