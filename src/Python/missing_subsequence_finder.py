@@ -47,6 +47,17 @@ class MSF(object):
             if not self.ith_pass(i+1):
                 return True
 
+    def missing_subsequences(self, n):
+
+        result = msf.search(n)
+        missing_subsequences = []
+        for k in msf.d.iterkeys():
+            if len(k) < (n):
+                for c in chars:
+                    if c not in msf.d[k]:
+                        missing_subsequences.append(k+c)
+        return missing_subsequences
+
 if __name__ == '__main__':
 
     import sys
@@ -54,23 +65,9 @@ if __name__ == '__main__':
     chars = 'ACGT'
     with open(sys.argv[1], 'r') as f:
         s = f.readline().strip()
-        n = int(sys.argv[2])
-
-        missing_subsequences = []
-
-        msf = MSF(s, chars)
-        result = msf.search(n)
-        print "Missing of length {}".format(n), result
-        for k in msf.d.iterkeys():
-            if len(k) < (n):
-                for c in chars:
-                    if c not in msf.d[k]:
-                        missing_subsequences.append(k+c)
-                        
-        print missing_subsequences
-
-        for k,v in msf.d.iteritems(): 
-            if len(k) < n: print k, v
+    n = int(sys.argv[2])
+    msf = MSF(s, chars)
+    print msf.missing_subsequences(n)
 
 
         
