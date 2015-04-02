@@ -8,6 +8,13 @@ class MSF(object):
         self.alphabet = alphabet
         self.d = {'': set([])}
 
+    def update_full_key(self, prefix):
+        """
+        Adds all one character increments of prefix to d, deletes prefix.
+        """
+        for c in self.d.pop(prefix):
+            self.d[prefix+c] = set([])
+
     def insert_last_letter(self, word):
         """
         returns True if the prefix now has all four possible endings
@@ -16,14 +23,8 @@ class MSF(object):
         if self.d.has_key(prefix): # else prefix is already known to be full
             self.d[prefix].add(word[-1])
             if len(self.d[prefix]) == 4:
+                self.update_full_key(prefix)
                 return True
-
-    def update_full_key(self, prefix):
-        """
-        Adds all one character increments of prefix to d, deletes prefix.
-        """
-        for c in self.d.pop(prefix):
-            self.d[prefix+c] = set([])
 
     def ith_pass(self, i):
         """
@@ -33,11 +34,9 @@ class MSF(object):
         for w, _ in enumerate(self.s[:len(self.s)-i+1]): # all indices to subsequences of length i
             word = self.s[w:w+i]
             full = self.insert_last_letter(word)
-            if full:
-                self.update_full_key(word[:-1])
-                if len(self.d) == 4**i:
-                    print "Checked {} words in {} seconds".format(w+1, time.time()-t)
-                    return True
+            if full and len(self.d) == 4**i:
+                print "Checked {} words in {} seconds".format(w+1, time.time()-t)
+                return True
 
     def search(self, n):
         """
