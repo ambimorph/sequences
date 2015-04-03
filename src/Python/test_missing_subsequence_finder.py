@@ -54,5 +54,9 @@ class MSFTest(unittest.TestCase):
         result = self.msf.missing_subsequences(2)
         self.assertListEqual(result, [])
 
+    def test_missing_subsequences_3(self):
+        result = self.msf.missing_subsequences(3)
+        self.assertListEqual(result, ['TCG', 'CCT', 'GCT'])
+
 if __name__ == '__main__':
     unittest.main()

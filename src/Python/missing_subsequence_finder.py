@@ -56,8 +56,8 @@ class MSF(object):
         missing_subsequences = []
         for k in self.d.iterkeys():
             if len(k) < (pass_in_which_found):
-                for c in chars:
-                    if c not in msf.d[k]:
+                for c in self.alphabet:
+                    if c not in self.d[k]:
                         missing_subsequences.append(k+c)
         return missing_subsequences
 
