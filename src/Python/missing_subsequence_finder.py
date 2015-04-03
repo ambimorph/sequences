@@ -40,7 +40,7 @@ class MSF(object):
 
     def search(self, n):
         """
-        Returns True if there are missing subsequences of length <= n
+        Returns smallest length <= n for which there are missing subsequences
         """
         for i in [i+1 for i in xrange(n)]:
             print "Pass {} of {}".format(i, n)
