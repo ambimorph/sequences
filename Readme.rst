@@ -26,6 +26,9 @@ If we get to the end of the ith pass and the size of d is less than
 |alphabet|^i, we now have at least one prefix of a subsequence not
 in s.
 
+From there we generate all possible words of length n containing the
+subsequences.
+
 
 Usage:
 
