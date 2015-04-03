@@ -26,7 +26,7 @@ class MSF(object):
                 self.update_full_key(prefix)
                 return True
 
-    def ith_pass(self, i):
+    def all_of_length_i(self, i):
         """
         Returns True if all subsequences of length i present, else None
         """
@@ -42,17 +42,17 @@ class MSF(object):
         """
         Returns True if there are missing subsequences of length <= n
         """
-        for i in xrange(n):
-            print "Pass {} of {}".format(i+1, n)
-            if not self.ith_pass(i+1):
-                return True
+        for i in [i+1 for i in xrange(n)]:
+            print "Pass {} of {}".format(i, n)
+            if not self.all_of_length_i(i):
+                return i
 
     def missing_subsequences(self, n):
 
-        result = msf.search(n)
+        pass_in_which_found = msf.search(n)
         missing_subsequences = []
         for k in msf.d.iterkeys():
-            if len(k) < (n):
+            if len(k) < (pass_in_which_found):
                 for c in chars:
                     if c not in msf.d[k]:
                         missing_subsequences.append(k+c)
