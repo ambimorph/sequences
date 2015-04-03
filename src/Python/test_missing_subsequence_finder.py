@@ -18,6 +18,16 @@ class MSFTest(unittest.TestCase):
                                           'AC': set([]),
                                           'AG': set([]),
                                           'AT': set([])})
+
+    def test_insert_last_letter(self):
+        self.msf.d = {'A': {'C', 'G'}}
+        self.msf.insert_last_letter('AA')
+        self.assertDictEqual(self.msf.d, {'A': {'A', 'C', 'G'}})
+        self.msf.insert_last_letter('AT')
+        self.assertDictEqual(self.msf.d, {'AA': set([]),
+                                          'AC': set([]),
+                                          'AG': set([]),
+                                          'AT': set([])})
                   
 if __name__ == '__main__':
     unittest.main()
