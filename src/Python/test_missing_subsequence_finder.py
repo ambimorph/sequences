@@ -33,6 +33,22 @@ class MSFTest(unittest.TestCase):
         self.assertTrue(self.msf.all_of_length_i(1))
         self.assertTrue(self.msf.all_of_length_i(2))
         self.assertFalse(self.msf.all_of_length_i(3))
+
+    def test_search_1(self):
+        result = self.msf.search(1)
+        self.assertEqual(result, None)
+
+    def test_search_2(self):
+        result = self.msf.search(2)
+        self.assertEqual(result, None)
                   
+    def test_search_3(self):
+        result = self.msf.search(3)
+        self.assertEqual(result, 3)
+
+    def test_search_4(self):
+        result = self.msf.search(4)
+        self.assertEqual(result, 3)
+
 if __name__ == '__main__':
     unittest.main()
