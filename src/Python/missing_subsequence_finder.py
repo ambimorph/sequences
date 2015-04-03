@@ -1,4 +1,4 @@
-import time
+import time, itertools
 
 class MSF(object):
 
@@ -58,6 +58,30 @@ class MSF(object):
                         missing_subsequences.append(k+c)
         return missing_subsequences
 
+    def interleavings(self, chars, chunk):
+        """
+        slides chunk across windows of chars
+        """
+        yield chars + chunk
+
+    def generate_candidates(self, n):
+
+        subsequences = self.missing_subsequences(n)
+        if len(subsequences) == 0:
+            return
+        length = len(subsequences[0])
+        if length == n:
+            for s in subsequences:
+                yield s
+        else:
+            filler_generator = (''.join(i) for i in
+                                itertools.product(self.alphabet, repeat = n - length))
+            for f in filler_generator:
+                for s in subsequences:
+                    for word in self.interleavings(f,s):
+                        yield word
+
+
 if __name__ == '__main__':
 
     import sys
@@ -67,7 +91,5 @@ if __name__ == '__main__':
         s = f.readline().strip()
     n = int(sys.argv[2])
     msf = MSF(s, chars)
-    print msf.missing_subsequences(n)
-
-
-        
+    for c in msf.generate_candidates(n):
+        print c
