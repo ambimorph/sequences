@@ -72,6 +72,17 @@ class MSFTest(unittest.TestCase):
         i = [i for i in self.msf.interleavings(chars, chunk)]
         self.assertSetEqual(set(i), {'AATC', 'TAAC', 'TCAA'})
 
+    def test_generate_candidates_3(self):
+        c = [c for c in self.msf.generate_candidates(3)]
+        self.assertSetEqual(set(c), {'TCG', 'CCT', 'GCT'})
+
+    def test_generate_candidates_4(self):
+        c = [c for c in self.msf.generate_candidates(4)]
+        self.assertSetEqual(set(c), {'ATCG', 'TCGA', 'ACCT', 'CCTA', 'AGCT',
+                                     'GCTA', 'CTCG', 'TCGC', 'CCCT', 'CCTC',
+                                     'CGCT', 'GCTC', 'GTCG', 'TCGG', 'GCCT',
+                                     'CCTG', 'GGCT', 'GCTG', 'TTCG', 'TCGT',
+                                     'TCCT', 'CCTT', 'TGCT', 'GCTT'})
 
 if __name__ == '__main__':
     unittest.main()
