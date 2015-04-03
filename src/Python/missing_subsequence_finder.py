@@ -62,11 +62,14 @@ class MSF(object):
         """
         slides chunk across windows of chars
         """
-        yield chars + chunk
+        for i, _ in enumerate(chars):
+            yield chars + chunk
+            yield chars[:i] + chunk + chars[i:]
 
     def generate_candidates(self, n):
 
         subsequences = self.missing_subsequences(n)
+        print "Missing subsequences:", subsequences
         if len(subsequences) == 0:
             return
         length = len(subsequences[0])
