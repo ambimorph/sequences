@@ -10,12 +10,31 @@ s = random seed
 
 Example usage:
 
-$ python example.py 200 3 1
+$ python example.py 200 4 99
 
-ATTCCCGTAATCTACGATTAAGTCACAACCAAACCATGGATTACGGTCTGCGTTGGAATCAGGGCCGTGCCAAGTGCAGTTGTAGTGCCGTATTTGTGGCATGAGCCCGGGCAAAGTTTTCTGAAATAAGCAAGACGCCCACCAATGAGTAAAGAGGGATTGAGCGCGACTTCTCTGCCATATTGATTGGCCAGCAAGCC
-Missing of length 3 True
-['TCG', 'CCT', 'GCT']
-
+CAAATCCGGTCCGATCCGAGTCTGTCCCAATGCTGTCATATGTTGAACTACACACGATAACCTCGTATGGGCAAAAAAGTTTATAACGAACTCCCATTGCCCGGCTGATGACTACTCGTTTGTCTCGGCGGTGCCTCGGTAGAGGGTATCCAGACGGATCAGGCGGGTTAAACGTCCGTGCTTTCACAACTGCTACCGTC
+Pass 1 of 4
+Checked 8 words in 2.59876251221e-05 seconds
+Pass 2 of 4
+Checked 47 words in 7.00950622559e-05 seconds
+Pass 3 of 4
+Missing subsequences: ['AGC', 'CGC']
+AAGC
+AGCA
+ACGC
+CGCA
+CAGC
+AGCC
+CCGC
+CGCC
+GAGC
+AGCG
+GCGC
+CGCG
+TAGC
+AGCT
+TCGC
+CGCT
 """
 
 length, n, randseed = map(int, sys.argv[1:])
@@ -26,18 +45,6 @@ random.seed(randseed)
 for i in xrange(length):
     s+= random.sample(chars, 1)[0]
 print s
-    
-missing_subsequences = []
-
 msf = MSF(s, chars)
-print "Missing of length {}".format(n), msf.search(n)
-for k in msf.d.iterkeys():
-    if len(k) < (n):
-        for c in chars:
-            if c not in msf.d[k]:
-                missing_subsequences.append(k+c)
-
-print missing_subsequences
-        
-
-        
+for c in msf.generate_candidates(n):
+    print c
