@@ -41,7 +41,7 @@ class MSFTest(unittest.TestCase):
     def test_search_2(self):
         result = self.msf.search(2)
         self.assertEqual(result, None)
-                  
+
     def test_search_3(self):
         result = self.msf.search(3)
         self.assertEqual(result, 3)
@@ -57,6 +57,21 @@ class MSFTest(unittest.TestCase):
     def test_missing_subsequences_3(self):
         result = self.msf.missing_subsequences(3)
         self.assertListEqual(result, ['TCG', 'CCT', 'GCT'])
+
+    def test_interleavings(self):
+        chars = ''
+        chunk = 'AA'
+        i = [i for i in self.msf.interleavings(chars, chunk)]
+        self.assertListEqual(i, ['AA'])
+
+        chars = 'T'
+        i = [i for i in self.msf.interleavings(chars, chunk)]
+        self.assertSetEqual(set(i), {'AAT', 'TAA'})
+
+        chars = 'TC'
+        i = [i for i in self.msf.interleavings(chars, chunk)]
+        self.assertSetEqual(set(i), {'AATC', 'TAAC', 'TCAA'})
+
 
 if __name__ == '__main__':
     unittest.main()

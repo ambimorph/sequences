@@ -65,6 +65,8 @@ class MSF(object):
         """
         slides chunk across windows of chars
         """
+        if chars == '' or chunk == '':
+            yield chars + chunk
         for i, _ in enumerate(chars):
             yield chars + chunk
             yield chars[:i] + chunk + chars[i:]
