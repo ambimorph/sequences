@@ -28,6 +28,11 @@ class MSFTest(unittest.TestCase):
                                           'AC': set([]),
                                           'AG': set([]),
                                           'AT': set([])})
+
+    def test_all_of_length_i(self):
+        self.assertTrue(self.msf.all_of_length_i(1))
+        self.assertTrue(self.msf.all_of_length_i(2))
+        self.assertFalse(self.msf.all_of_length_i(3))
                   
 if __name__ == '__main__':
     unittest.main()
