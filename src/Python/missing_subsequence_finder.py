@@ -10,7 +10,10 @@ class MSF(object):
 
     def update_full_key(self, prefix):
         """
-        Adds all one character increments of prefix to d, deletes prefix.
+        Adds all one character increments of prefix to d, deletes
+        prefix.
+        Should be used only when d[prefix] is the set of all chars in
+        alphabet.
         """
         for c in self.d.pop(prefix):
             self.d[prefix+c] = set([])
@@ -83,7 +86,6 @@ class MSF(object):
                 for s in subsequences:
                     for word in self.interleavings(f,s):
                         yield word
-
 
 if __name__ == '__main__':
 
