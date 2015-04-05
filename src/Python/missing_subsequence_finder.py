@@ -20,6 +20,7 @@ class MSF(object):
 
     def insert_last_letter(self, word):
         """
+        In addition to adding the the last letter to the set mapped to by the prefix,
         returns True if the prefix now has all four possible endings
         """
         prefix = word[:-1]
