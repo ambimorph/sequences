@@ -13,7 +13,7 @@ of subsequence we want to find that is not in s.
 invariant:
 
 At the beginning of the ith pass, the dictionary d holds all
-|alphabet|^(i-1) keys, mapped to empty sets.  E.g. if the alphabet is
+:math:`|alphabet|^(i-1)` keys, mapped to empty sets.  E.g. if the alphabet is
 {A,C,G,T}, then at the beginning of the third pass, d holds the 16
 keys AA, AC, AG,... TT.
 
